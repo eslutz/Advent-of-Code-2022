@@ -18,7 +18,10 @@
             file.Close();
 
             _totalScore = Part1_GetTotalScore();
-            Console.WriteLine($"The total score for Player is: {_totalScore}");
+            Console.WriteLine($"Part 1 - The total score for Player is: {_totalScore}");
+            _totalScore = Part2_GetTotalScore();
+            Console.WriteLine($"Part 2 - The total score for Player is: {_totalScore}");
+
         }
 
         private int Part1_GetTotalScore()
@@ -31,7 +34,17 @@
             return score;
         }
 
-        private OUTCOME GetMatchOutcome(GameMove move)
+        private int Part2_GetTotalScore()
+        {
+            var score = 0;
+            foreach (var move in _moves)
+            {
+                score += (int)GetPlayerMove(move) + (int)move.Outcome;
+            }
+            return score;
+        }
+
+        private static OUTCOME GetMatchOutcome(GameMove move)
         {
             if ((move.Opponent == RPS.Rock && move.Player == RPS.Scissors)
                 || (move.Opponent == RPS.Paper && move.Player == RPS.Rock)
@@ -51,10 +64,31 @@
             }
         }
 
+        private static RPS GetPlayerMove(GameMove move)
+        {
+            if(move.Outcome == OUTCOME.Win)
+            {
+                if (move.Opponent == RPS.Rock) { return RPS.Paper; }
+                else if (move.Opponent == RPS.Paper) { return RPS.Scissors; }
+                else { return RPS.Rock; }
+            }
+            else if (move.Outcome == OUTCOME.Lose)
+            {
+                if (move.Opponent == RPS.Rock) { return RPS.Scissors; }
+                else if (move.Opponent == RPS.Paper) { return RPS.Rock; }
+                else { return RPS.Paper; }
+            }
+            else
+            {
+                return move.Opponent;
+            }
+        }
+
         public class GameMove
         {
             public RPS Opponent { get; private set; }
             public RPS Player { get; private set; }
+            public OUTCOME Outcome { get; set; }
 
             public GameMove(char opponentMove, char playerMove)
             {
@@ -72,7 +106,7 @@
                         break;
                 }
 
-                // Set Player move
+                // Part 1 - Set Player move
                 switch (playerMove)
                 {
                     case 'X':
@@ -83,6 +117,20 @@
                         break;
                     case 'Z':
                         Player = RPS.Scissors;
+                        break;
+                }
+
+                // Part 2 - Set match outcome
+                switch (playerMove)
+                {
+                    case 'X':
+                        Outcome = OUTCOME.Lose;
+                        break;
+                    case 'Y':
+                        Outcome = OUTCOME.Draw;
+                        break;
+                    case 'Z':
+                        Outcome = OUTCOME.Win;
                         break;
                 }
             }
