@@ -1,0 +1,11 @@
+﻿<Project>
+	<PropertyGroup>
+		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+		<Authors>Eric Slutz</Authors>
+		<Copyright>Copyright 2022 (c)</Copyright>
+		<LangVersion>latest</LangVersion>
+		<NoWarn>NU1603,NU1701</NoWarn>
+		<Nullable>enable</Nullable>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+</Project>
