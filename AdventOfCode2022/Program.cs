@@ -6,7 +6,7 @@ using System.Text;
 [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters")]
 internal sealed class Program
 {
-	private const int _days = 3;
+	private const int _days = 4;
 	private const string _heading = "Advent of Code - 2022";
 	private const int _headerLength = 45;
 	private static readonly int _whiteSpaceLength =	(_headerLength - _heading.Length - 4) / 2;
@@ -41,6 +41,7 @@ internal sealed class Program
 					new Day1(),
 					new Day2(),
 					new Day3(),
+					new Day4(),
 				};
 				var runAll = menuSelection == _days + 1;
 
